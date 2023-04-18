@@ -187,8 +187,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 MaterialButton(
                                     height: 90.00,
                                     minWidth: 90.00,
-                                    onPressed: nothing, child: const Text(' ',
-                                    style: TextStyle(fontSize: 40, color: Colors.black))),
+                                    onPressed: null, child: const Text(' ',
+                                    )),
                               ]
                           ),
                         ]
