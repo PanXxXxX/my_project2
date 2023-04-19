@@ -154,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(numbers, style: const TextStyle(fontSize: 20, color: Colors.white38)),
-                    Text(result, style: const TextStyle(fontSize: 25, color: Colors.lightGreenAccent)),
+                    Text(result, style: const TextStyle(fontSize: 35, color: Colors.lightGreenAccent)),
                   ],
                 ),
               ),
@@ -174,12 +174,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                     height: 90.00,
                                     minWidth: 90.00,
                                     onPressed: () => calc('÷'), child: const Text("÷",
-                                    style: TextStyle(fontSize: 40, color: Colors.white70))),
+                                    style: TextStyle(fontSize: 40, color: Colors.orangeAccent))),
                                 MaterialButton(
                                     height: 90.00,
                                     minWidth: 90.00,
                                     onPressed: () => calc('×'), child: const Text("×",
-                                    style: TextStyle(fontSize: 40, color: Colors.white70))),
+                                    style: TextStyle(fontSize: 40, color: Colors.orangeAccent))),
                                 MaterialButton(
                                     height: 90.00,
                                     minWidth: 90.00,
@@ -209,7 +209,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     height: 90.00,
                                     minWidth: 90.00,
                                     onPressed: () => calc('-'), child: const Text("-",
-                                    style: TextStyle(fontSize: 40, color: Colors.white70))),
+                                    style: TextStyle(fontSize: 40, color: Colors.orangeAccent))),
                               ]
                           ),
                           Row(
@@ -234,7 +234,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     height: 90.00,
                                     minWidth: 90.00,
                                     onPressed: () => calc('+'), child: const Text("+",
-                                    style: TextStyle(fontSize: 40, color: Colors.white70))),
+                                    style: TextStyle(fontSize: 40, color: Colors.orangeAccent))),
                               ]
                           ),
                           Row(
