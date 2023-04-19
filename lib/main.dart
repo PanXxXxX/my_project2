@@ -34,45 +34,127 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  double result = 0;
-  double first = 0;
-  double second = 0;
-  var action;
-  void calc() {
+
+  int temp = 0;
+  double num1 = 0.0;
+  double num2 = 0.0;
+  String operand = "";
+  String result = "0";
+  String numbers = "";
+  void calc(String buttonText) {
     setState(() {
-      if(action == 'add'){
-        result = first + second;
-      }
-      else if(action == 'subtract'){
-        result = first - second;
-      }
-      else if(action == 'multiply'){
-        result = first * second;
-      }
-      else if(action == 'divide'){
-        result = first / second;
+      if (buttonText == "C") {
+        result = "0";
+        num1 = 0.0;
+        num2 = 0.0;
+        numbers ="";
+        operand = "";
+      } else if (buttonText == "+" || buttonText == "-" || buttonText == "×" || buttonText == "÷") {
+        num1 = double.parse(result);
+        operand = buttonText;
+        numbers += buttonText;
+        result = "0";
+      } else if (buttonText == ",") {
+        if (!result.contains(",")) {
+          result += ".";
+          numbers += buttonText;
+        }
+      } else if (buttonText == "=") {
+        num2 = double.parse(result);
+        if (operand == "+") {
+          if ((num1 + num2) % 1 == 0) {
+            temp = (num1 + num2).toInt();
+            result = temp.toString();
+          }
+          else {
+            result = (num1 + num2).toString();
+          }
+        }
+        if (operand == "-") {
+          if ((num1 - num2) % 1 == 0) {
+            temp = (num1 - num2).toInt();
+            result = temp.toString();
+          }
+          else {
+            result = (num1 - num2).toString();
+          }
+        }
+
+        if (operand == "×") {
+          if ((num1 * num2) % 1 == 0) {
+            temp = (num1 * num2).toInt();
+            result = temp.toString();
+          }
+          else {
+            result = (num1 * num2).toString();
+          }
+        }
+        //if (operand == "÷") {
+        //if (num2==0){
+        // result = "You can't divide by 0";
+        // }
+        //else {
+        // result = (num1 / num2).toString();
+        //}
+        // }
+        if (operand == "÷") {
+          if (num2 == 0) {
+            result = "You can't divide by 0";
+          }
+          else {
+            if ((num1 / num2) % 1 == 0) {
+              temp = (num1 ~/ num2);
+              result = temp.toString();
+            }
+            else {
+              result = (num1 / num2).toString();
+            }
+          }
+        }
+        num1 = 0.0;
+        num2 = 0.0;
+        operand = "";
+      } else {
+        if (result == "0") {
+          result = buttonText;
+          numbers += buttonText;
+        } else {
+          result += buttonText;
+          numbers += buttonText;
+        }
       }
     });
   }
-
-
-  void nothing() {
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orangeAccent,
+        backgroundColor: Colors.black87,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      backgroundColor: Colors.orangeAccent,
+      backgroundColor: Colors.black87,
       body: Center(
         child: Column(
+
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
+
+              Container(
+                width: 380,
+                height: 220,
+                padding: const EdgeInsets.all(30),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(numbers, style: const TextStyle(fontSize: 20, color: Colors.white38)),
+                    Text(result, style: const TextStyle(fontSize: 25, color: Colors.lightGreenAccent)),
+                  ],
+                ),
+              ),
+
               Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
@@ -82,22 +164,22 @@ class _MyHomePageState extends State<MyHomePage> {
                                 MaterialButton(
                                     height: 90.00,
                                     minWidth: 90.00,
-                                    onPressed: nothing, child: const Text('C',
+                                    onPressed: () => calc('C'), child: const Text("C",
                                     style: TextStyle(fontSize: 40, color: Colors.red))),
                                 MaterialButton(
                                     height: 90.00,
                                     minWidth: 90.00,
-                                    onPressed: nothing, child: const Text('x',
-                                    style: TextStyle(fontSize: 40, color: Colors.black))),
+                                    onPressed: () => calc('÷'), child: const Text("÷",
+                                    style: TextStyle(fontSize: 40, color: Colors.white70))),
                                 MaterialButton(
                                     height: 90.00,
                                     minWidth: 90.00,
-                                    onPressed: nothing, child: const Text('/',
-                                    style: TextStyle(fontSize: 40, color: Colors.black))),
+                                    onPressed: () => calc('×'), child: const Text("×",
+                                    style: TextStyle(fontSize: 40, color: Colors.white70))),
                                 MaterialButton(
                                     height: 90.00,
                                     minWidth: 90.00,
-                                    onPressed: calc, child: const Text('=',
+                                    onPressed: () => calc('='), child: const Text("=",
                                     style: TextStyle(fontSize: 40, color: Colors.green))),
                               ]
                           ),
@@ -107,23 +189,23 @@ class _MyHomePageState extends State<MyHomePage> {
                                 MaterialButton(
                                     height: 90.00,
                                     minWidth: 90.00,
-                                    onPressed: nothing, child: const Text('7',
-                                    style: TextStyle(fontSize: 40, color: Colors.black))),
+                                    onPressed: () => calc('7'), child: const Text("7",
+                                    style: TextStyle(fontSize: 40, color: Colors.white70))),
                                 MaterialButton(
                                     height: 90.00,
                                     minWidth: 90.00,
-                                    onPressed: nothing, child: const Text('8',
-                                    style: TextStyle(fontSize: 40, color: Colors.black))),
+                                    onPressed: () => calc('8'), child: const Text("8",
+                                    style: TextStyle(fontSize: 40, color: Colors.white70))),
                                 MaterialButton(
                                     height: 90.00,
                                     minWidth: 90.00,
-                                    onPressed: nothing, child: const Text('9',
-                                    style: TextStyle(fontSize: 40, color: Colors.black))),
+                                    onPressed: () => calc('9'), child: const Text("9",
+                                    style: TextStyle(fontSize: 40, color: Colors.white70))),
                                 MaterialButton(
                                     height: 90.00,
                                     minWidth: 90.00,
-                                    onPressed: nothing, child: const Text('+',
-                                    style: TextStyle(fontSize: 40, color: Colors.black))),
+                                    onPressed: () => calc('-'), child: const Text("-",
+                                    style: TextStyle(fontSize: 40, color: Colors.white70))),
                               ]
                           ),
                           Row(
@@ -132,23 +214,23 @@ class _MyHomePageState extends State<MyHomePage> {
                                 MaterialButton(
                                     height: 90.00,
                                     minWidth: 90.00,
-                                    onPressed: nothing, child: const Text('4',
-                                    style: TextStyle(fontSize: 40, color: Colors.black))),
+                                    onPressed: () => calc('4'), child: const Text("4",
+                                    style: TextStyle(fontSize: 40, color: Colors.white70))),
                                 MaterialButton(
                                     height: 90.00,
                                     minWidth: 90.00,
-                                    onPressed: nothing, child: const Text('5',
-                                    style: TextStyle(fontSize: 40, color: Colors.black))),
+                                    onPressed: () => calc('5'), child: const Text("5",
+                                    style: TextStyle(fontSize: 40, color: Colors.white70))),
                                 MaterialButton(
                                     height: 90.00,
                                     minWidth: 90.00,
-                                    onPressed: nothing, child: const Text('6',
-                                    style: TextStyle(fontSize: 40, color: Colors.black))),
+                                    onPressed: () => calc('6'), child: const Text("6",
+                                    style: TextStyle(fontSize: 40, color: Colors.white70))),
                                 MaterialButton(
                                     height: 90.00,
                                     minWidth: 90.00,
-                                    onPressed: nothing, child: const Text('-',
-                                    style: TextStyle(fontSize: 40, color: Colors.black))),
+                                    onPressed: () => calc('+'), child: const Text("+",
+                                    style: TextStyle(fontSize: 40, color: Colors.white70))),
                               ]
                           ),
                           Row(
@@ -157,23 +239,23 @@ class _MyHomePageState extends State<MyHomePage> {
                                 MaterialButton(
                                     height: 90.00,
                                     minWidth: 90.00,
-                                    onPressed: nothing, child: const Text('1',
-                                    style: TextStyle(fontSize: 40, color: Colors.black))),
+                                    onPressed: () => calc('1'), child: const Text("1",
+                                    style: TextStyle(fontSize: 40, color: Colors.white70))),
                                 MaterialButton(
                                     height: 90.00,
                                     minWidth: 90.00,
-                                    onPressed: nothing, child: const Text('2',
-                                    style: TextStyle(fontSize: 40, color: Colors.black))),
+                                    onPressed: () => calc('2'), child: const Text("2",
+                                    style: TextStyle(fontSize: 40, color: Colors.white70))),
                                 MaterialButton(
                                     height: 90.00,
                                     minWidth: 90.00,
-                                    onPressed: nothing, child: const Text('3',
-                                    style: TextStyle(fontSize: 40, color: Colors.black))),
+                                    onPressed: () => calc('3'), child: const Text("3",
+                                    style: TextStyle(fontSize: 40, color: Colors.white70))),
                                 MaterialButton(
                                     height: 90.00,
                                     minWidth: 90.00,
-                                    onPressed: nothing, child: const Text(',',
-                                    style: TextStyle(fontSize: 40, color: Colors.black))),
+                                    onPressed: () => calc(','), child: const Text(",",
+                                    style: TextStyle(fontSize: 40, color: Colors.white70))),
                               ]
                           ),
                           Row(
@@ -182,12 +264,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                 MaterialButton(
                                     height: 90.00,
                                     minWidth: 270.00,
-                                    onPressed: nothing, child: const Text('0',
-                                    style: TextStyle(fontSize: 40, color: Colors.black))),
+                                    onPressed: () => calc('0'), child: const Text("0",
+                                    style: TextStyle(fontSize: 40, color: Colors.white70))),
                                 MaterialButton(
                                     height: 90.00,
                                     minWidth: 90.00,
-                                    onPressed: null, child: const Text(' ',
+                                    onPressed: null, child: const Text('',
                                     )),
                               ]
                           ),
