@@ -259,7 +259,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     height: 90.00,
                                     minWidth: 90.00,
                                     onPressed: () => calc(','), child: const Text(",",
-                                    style: TextStyle(fontSize: 40, color: Colors.white70))),
+                                    style: TextStyle(fontSize: 40, color: Colors.orangeAccent))),
                               ]
                           ),
                           Row(
