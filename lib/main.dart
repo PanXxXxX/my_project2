@@ -47,8 +47,12 @@ class _MyHomePageState extends State<MyHomePage> {
         result = "0";
         num1 = 0.0;
         num2 = 0.0;
-        numbers ="";
+        numbers = "";
         operand = "";
+      }else if(buttonText == "-" && result == "0"){
+        result = "";
+        numbers += buttonText;
+        result = ("-$result");
       } else if (buttonText == "+" || buttonText == "-" || buttonText == "×" || buttonText == "÷") {
         num1 = double.parse(result);
         operand = buttonText;
